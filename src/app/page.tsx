@@ -14,7 +14,7 @@ export default async function Home() {
 
   if (randomPhotoOne && randomPhotoTwo)
     return (
-      <main className="bg-mainColor lg:overflow-hidden lg:h-[calc(100dvh-84px)] lg:max-h-[calc(100dvh-84px)]">
+      <main className="bg-white lg:overflow-hidden lg:h-[calc(100dvh-84px)] lg:max-h-[calc(100dvh-84px)]">
         <div className="grid grid-rows-2 h-full lg:grid-rows-1 lg:grid-cols-2">
           <div className="max-h-[calc(100dvh-84px)] relative">
             <VerticalRandomPhoto photos={photos} />

@@ -2,7 +2,7 @@ import Gallery from '@/components/Gallery';
 
 export default function PortfolioPage() {
   return (
-    <main className="bg-mainColor">
+    <main className="bg-white">
       <Gallery />
     </main>
   );

@@ -14,7 +14,7 @@ export default function ExpandButton({ photoUrl }: { photoUrl: string }) {
 
   return (
     <button
-      className="absolute cursor-pointer bottom-3 right-3 px-3 py-1.5 bg-white/30 hover:bg-white/100"
+      className="absolute cursor-pointer bottom-3 right-3 px-3 py-1.5"
       type="button"
       onClick={() => handleOpenPhoto()}
     >

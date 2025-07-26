@@ -1,5 +1,5 @@
 import { getPhotos } from '@/api';
-import VerticalRandomPhoto from '@/components/VerticalImage';
+import AboutImage from '@/components/AboutImage';
 
 const data = [
   {
@@ -36,10 +36,10 @@ export default async function About() {
   const photos = await getPhotos();
 
   return (
-    <main className="bg-mainColor lg:overflow-hidden lg:h-[calc(100dvh-84px)] lg:max-h-[calc(100dvh-84px)]">
+    <main className="bg-white">
       <div className="grid grid-rows-2 lg:grid-rows-1 lg:grid-cols-2 md:gap-10 gap-4 py-3 px-5 lg:p-10 h-full">
         <div className="lg:max-h-[calc(100dvh-84px)] h-full flex flex-col items-center lg:justify-center md:gap-10 gap-4 py-3 lg:py-10">
-          <h1 className="text-5xl uppercase text-center font-bold">
+          <h1 className="text-5xl font-georgia uppercase text-center font-bold">
             Anna Kobzar
           </h1>
           <div className="gap-4 grid grid-cols-2 lg:flex lg:flex-col w-fit mx-auto items-start justify-center">
@@ -51,8 +51,14 @@ export default async function About() {
           </div>
         </div>
         <div className="h-full overflow-hidden relative">
-          <VerticalRandomPhoto photos={photos} />
+          <AboutImage photos={photos} />
         </div>
+        {/* <div
+          className="col-span-2 w-8/12 instFrame mx-auto"
+          dangerouslySetInnerHTML={{
+            __html: `<iframe src="https://2a808c6e543d4552bcffa0f2c931ba7b.elf.site" width="100%" height="600"></iframe>`
+          }}
+        /> */}
       </div>
     </main>
   );

@@ -5,12 +5,15 @@ import { instagram, tiktok, whatsapp } from '@/static/icons';
 
 export default function Header() {
   return (
-    <header id="header" className={`py-6 px-10 bg-white z-50 w-full`}>
+    <header
+      id="header"
+      className={`py-6 px-10 bg-white sticky top-0 z-50 w-full`}
+    >
       <div
         className={`h-fit px-3 md:flex-row flex-col gap-4 flex items-center justify-between`}
       >
         <Link
-          className={`text-textColor font-bold font-georgia text-3xl uppercase`}
+          className={`text-textColor font-bold mx-auto font-georgia text-3xl uppercase`}
           href={ROUTE_HOME}
         >
           Anna Kobzar

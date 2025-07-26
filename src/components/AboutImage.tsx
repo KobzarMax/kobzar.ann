@@ -12,7 +12,7 @@ type Props = {
   photos: Photo[];
 };
 
-export default function VerticalRandomPhoto({ photos }: Props) {
+export default function AboutImage({ photos }: Props) {
   const [randomPhoto, setRandomPhoto] = useState<Photo | null>(null);
   const [isLandscape, setIsLandscape] = useState(false);
 
@@ -30,7 +30,7 @@ export default function VerticalRandomPhoto({ photos }: Props) {
       fill
       sizes="100vw"
       loading="lazy"
-      className="max-h-[calc(100dvh-84px)] object-center object-cover"
+      className="max-h-[calc(100dvh-84px)] object-top object-contain"
       src={randomPhoto.url}
       alt={randomPhoto.name}
       onLoad={(img) => {
@@ -43,10 +43,10 @@ export default function VerticalRandomPhoto({ photos }: Props) {
     <Image
       width={0}
       height={0}
-      style={{ width: '100%', height: 'auto' }}
+      style={{ height: 'auto' }}
       sizes="100vw"
       loading="lazy"
-      className="max-h-[calc(100dvh-84px)] object-cover"
+      className="max-h-[calc(100dvh-84px)] w-fit object-contain"
       src={randomPhoto.url}
       alt={randomPhoto.name}
       onLoad={(img) => {
