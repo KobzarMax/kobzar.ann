@@ -23,8 +23,6 @@ export default function VerticalRandomPhoto({ photos }: Props) {
 
   if (!randomPhoto) return null; // Or return a loader / skeleton
 
-  console.log(randomPhoto);
-
   return isLandscape ? (
     <Image
       fill
