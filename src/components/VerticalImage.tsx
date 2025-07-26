@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 type Photo = {
@@ -13,46 +13,45 @@ type Props = {
 };
 
 export default function VerticalRandomPhoto({ photos }: Props) {
-  const [currentIndex, setCurrentIndex] = useState(() => {
-    return Math.floor(Math.random() * photos.length);
-  });
-  const [triedIndices, setTriedIndices] = useState<Set<number>>(new Set());
+  const [randomPhoto, setRandomPhoto] = useState<Photo | null>(null);
+  const [isLandscape, setIsLandscape] = useState(false);
 
-  const currentPhoto = photos[currentIndex];
+  useEffect(() => {
+    const index = Math.floor(Math.random() * photos.length);
+    setRandomPhoto(photos[index]);
+  }, [photos]);
 
-  const handleLoad = (e: React.SyntheticEvent<HTMLImageElement>) => {
-    const { naturalWidth, naturalHeight } = e.currentTarget;
+  if (!randomPhoto) return null; // Or return a loader / skeleton
 
-    const isLandscape = naturalWidth > naturalHeight;
-
-    if (isLandscape) {
-      // Add current index to tried set
-      setTriedIndices((prev) => new Set(prev).add(currentIndex));
-
-      // Find next untried index
-      const nextIndex = photos.findIndex(
-        (_, idx) => !triedIndices.has(idx) && idx !== currentIndex
-      );
-
-      if (nextIndex !== -1) {
-        setCurrentIndex(nextIndex);
-      } else {
-        console.warn('No vertical photo found.');
-      }
-    }
-  };
-
-  return (
+  return isLandscape ? (
     <Image
-      width={0}
-      height={0}
+      fill
       sizes="100vw"
       loading="lazy"
       className="max-h-[calc(100dvh-84px)] object-center object-cover"
+      src={randomPhoto.url}
+      alt={randomPhoto.name}
+      onLoad={(img) => {
+        setIsLandscape(
+          img.currentTarget.naturalWidth > img.currentTarget.naturalHeight
+        );
+      }}
+    />
+  ) : (
+    <Image
+      width={0}
+      height={0}
       style={{ width: '100%', height: 'auto' }}
-      src={currentPhoto.url}
-      alt={currentPhoto.name}
-      onLoad={handleLoad}
+      sizes="100vw"
+      loading="lazy"
+      className="max-h-[calc(100dvh-84px)] object-center object-cover"
+      src={randomPhoto.url}
+      alt={randomPhoto.name}
+      onLoad={(img) => {
+        setIsLandscape(
+          img.currentTarget.naturalWidth > img.currentTarget.naturalHeight
+        );
+      }}
     />
   );
 }
