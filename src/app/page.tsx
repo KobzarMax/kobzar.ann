@@ -15,14 +15,13 @@ export default async function Home() {
   if (randomPhotoOne && randomPhotoTwo)
     return (
       <main className="bg-mainColor lg:overflow-hidden lg:h-[calc(100dvh-84px)] lg:max-h-[calc(100dvh-84px)]">
-        <div className="grid grid-rows-2 lg:grid-cols-2">
+        <div className="grid grid-rows-2 h-full lg:grid-rows-1 lg:grid-cols-2">
           <div className="max-h-[calc(100dvh-84px)] relative">
             <Image
               fill
               sizes="100vw"
               loading="lazy"
               className="max-h-[calc(100dvh-84px)] object-center object-cover"
-              style={{ width: '100%', height: 'auto' }}
               src={randomPhotoOne.url}
               alt={randomPhotoOne.name}
             />
@@ -43,7 +42,6 @@ export default async function Home() {
               sizes="100vw"
               loading="lazy"
               className="max-h-[calc(100dvh-84px)] object-center object-cover"
-              style={{ width: '100%', height: 'auto' }}
               src={randomPhotoTwo.url}
               alt={randomPhotoTwo.name}
             />
