@@ -14,7 +14,7 @@ export default async function Home() {
 
   if (randomPhotoOne && randomPhotoTwo)
     return (
-      <main className="bg-mainColor lg:overflow-hidden lg:h-[calc(100dvh-84px)] lg:max-h-[calc(100dvh-84px)]s">
+      <main className="bg-mainColor lg:overflow-hidden lg:h-[calc(100dvh-84px)] lg:max-h-[calc(100dvh-84px)]">
         <div className="grid grid-rows-2 lg:grid-cols-2">
           <div className="max-h-[calc(100dvh-84px)] relative">
             <Image
