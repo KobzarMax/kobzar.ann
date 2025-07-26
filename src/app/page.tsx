@@ -18,36 +18,44 @@ export default async function Home() {
         <div className="grid grid-rows-2 lg:grid-cols-2">
           <div className="max-h-[calc(100dvh-84px)] relative">
             <Image
-              width={0}
-              height={0}
+              fill
               sizes="100vw"
               loading="lazy"
-              className="max-h-[calc(100dvh-84px)] object-cover"
+              className="max-h-[calc(100dvh-84px)] object-center object-cover"
               style={{ width: '100%', height: 'auto' }}
               src={randomPhotoOne.url}
               alt={randomPhotoOne.name}
             />
-            <Link className="inset-0 absolute" href={ROUTE_ABOUT}>
-              <span className="uppercase absolute left-1/2 -translate-x-1/2 bg-black text-white bottom-[12.5%] text-3xl font-bold px-4 b py-3">
-                about
-              </span>
+            <Link className="inset-0 absolute mainLink" href={ROUTE_ABOUT}>
+              <div className="absolute left-1/2 -translate-x-1/2 bottom-[12.5%]">
+                <div className="px-3 b py-3 relative">
+                  <span className="uppercase text-white text-[2.188rem] font-bold">
+                    about
+                  </span>
+                  <span className="linkDecoration bg-white absolute bottom-0 left-1/2 -translate-x-1/2 h-[0.1875rem] w-[1.875rem] opacity-0 transition-all duration-300" />
+                </div>
+              </div>
             </Link>
           </div>
           <div className="max-h-[calc(100dvh-84px)] relative">
             <Image
-              width={0}
-              height={0}
+              fill
               sizes="100vw"
               loading="lazy"
-              className="max-h-[calc(100dvh-84px)] object-cover"
+              className="max-h-[calc(100dvh-84px)] object-center object-cover"
               style={{ width: '100%', height: 'auto' }}
               src={randomPhotoTwo.url}
               alt={randomPhotoTwo.name}
             />
-            <Link className="inset-0 absolute" href={ROUTE_PORTFOLIO}>
-              <span className="uppercase absolute left-1/2 -translate-x-1/2 bg-black text-white bottom-[12.5%] text-3xl font-bold px-4 b py-3">
-                portfolio
-              </span>
+            <Link className="inset-0 absolute mainLink" href={ROUTE_PORTFOLIO}>
+              <div className="absolute left-1/2 -translate-x-1/2 bottom-[12.5%]">
+                <div className="px-3 b py-3 relative">
+                  <span className="uppercase text-white text-[2.188rem] font-bold">
+                    portfolio
+                  </span>
+                  <span className="linkDecoration bg-white absolute bottom-0 left-1/2 -translate-x-1/2 h-[0.1875rem] w-[1.875rem] opacity-0 transition-all duration-300" />
+                </div>
+              </div>
             </Link>
           </div>
         </div>

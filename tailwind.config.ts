@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['SuisseIntl', 'sans-serif'],
+        georgia: ['georgiab', 'sans-serif']
+      },
       screens: {
         '2xl': '1440px',
         '3xl': '1780px',
