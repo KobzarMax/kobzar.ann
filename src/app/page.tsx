@@ -15,10 +15,13 @@ export default async function Home() {
   if (randomPhotoOne && randomPhotoTwo)
     return (
       <main className="bg-white lg:overflow-hidden lg:h-[calc(100dvh-84px)] lg:max-h-[calc(100dvh-84px)]">
-        <div className="grid grid-rows-2 h-full lg:grid-rows-1 lg:grid-cols-2">
+        <div className="grid grid-rows-2 h-full -space-y-0.5 lg:space-y-0 lg:grid-rows-1 lg:grid-cols-2">
           <div className="max-h-[calc(100dvh-84px)] relative">
-            <VerticalRandomPhoto photos={photos} />
-            <Link className="inset-0 absolute mainLink" href={ROUTE_ABOUT}>
+            <VerticalRandomPhoto randomPhoto={randomPhotoOne} />
+            <Link
+              className="inset-0 absolute outline-none mainLink"
+              href={ROUTE_ABOUT}
+            >
               <div className="absolute left-1/2 -translate-x-1/2 bottom-[12.5%]">
                 <div className="px-3 b py-3 relative">
                   <span className="uppercase text-white text-[2.188rem] font-bold">
@@ -30,8 +33,11 @@ export default async function Home() {
             </Link>
           </div>
           <div className="max-h-[calc(100dvh-84px)] relative">
-            <VerticalRandomPhoto photos={photos} />
-            <Link className="inset-0 absolute mainLink" href={ROUTE_PORTFOLIO}>
+            <VerticalRandomPhoto randomPhoto={randomPhotoTwo} />
+            <Link
+              className="inset-0 absolute outline-none mainLink"
+              href={ROUTE_PORTFOLIO}
+            >
               <div className="absolute left-1/2 -translate-x-1/2 bottom-[12.5%]">
                 <div className="px-3 b py-3 relative">
                   <span className="uppercase text-white text-[2.188rem] font-bold">

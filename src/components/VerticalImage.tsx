@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 
 type Photo = {
@@ -9,19 +9,11 @@ type Photo = {
 };
 
 type Props = {
-  photos: Photo[];
+  randomPhoto: Photo;
 };
 
-export default function VerticalRandomPhoto({ photos }: Props) {
-  const [randomPhoto, setRandomPhoto] = useState<Photo | null>(null);
+export default function VerticalRandomPhoto({ randomPhoto }: Props) {
   const [isLandscape, setIsLandscape] = useState(false);
-
-  useEffect(() => {
-    const index = Math.floor(Math.random() * photos.length);
-    setRandomPhoto(photos[index]);
-  }, [photos]);
-
-  if (!randomPhoto) return null; // Or return a loader / skeleton
 
   return isLandscape ? (
     <Image

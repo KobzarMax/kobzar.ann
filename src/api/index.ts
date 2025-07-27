@@ -1,23 +1,43 @@
 export async function getPhotos(): Promise<RenderPhotoType[]> {
+  const photos: RenderPhotoType[] = [];
+  let nextPageToken: string | undefined = undefined;
+
   try {
-    const res = await fetch(
-      `https://www.googleapis.com/drive/v3/files?q='${process.env.FOLDER_ID}'+in+parents&key=${process.env.API_KEY}&fields=files(id,name,mimeType)`,
-      { cache: 'no-store' }
-    );
+    do {
+      let url =
+        `https://www.googleapis.com/drive/v3/files` +
+        `?q='${process.env.FOLDER_ID}' in parents` +
+        `&key=${process.env.API_KEY}` +
+        `&fields=nextPageToken,files(id,name,mimeType)` +
+        `&pageSize=1000`;
 
-    if (!res.ok) {
-      throw new Error(`Failed to fetch photos: ${res.statusText}`);
-    }
+      if (nextPageToken) {
+        url += `&pageToken=${nextPageToken}`;
+      }
 
-    const data: GoogleDriveResponse = await res.json();
+      const res = await fetch(url, { cache: 'no-store' });
 
-    return data.files
-      .filter((photo) => photo.mimeType.startsWith('image/'))
-      .map((photo) => ({
-        id: photo.id,
-        name: photo.name,
-        url: `https://lh3.googleusercontent.com/d/${photo.id}`
-      }));
+      if (!res.ok) {
+        throw new Error(`Failed to fetch photos: ${res.statusText}`);
+      }
+
+      const data: GoogleDriveResponse & { nextPageToken?: string } =
+        await res.json();
+
+      const filtered = data.files
+        .filter((photo) => photo.mimeType.startsWith('image/'))
+        .map((photo) => ({
+          id: photo.id,
+          name: photo.name,
+          url: `https://lh3.googleusercontent.com/d/${photo.id}`
+        }));
+
+      photos.push(...filtered);
+
+      nextPageToken = data.nextPageToken;
+    } while (nextPageToken);
+
+    return photos;
   } catch (error) {
     console.error(error);
     return [];
