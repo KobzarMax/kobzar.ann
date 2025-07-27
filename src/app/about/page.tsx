@@ -39,7 +39,7 @@ export default async function About() {
     <main className="bg-white lg:overflow-hidden lg:h-[calc(100dvh-84px)] lg:max-h-[calc(100dvh-84px)]">
       <div className="grid grid-rows-[auto_1fr] lg:grid-rows-1 lg:grid-cols-2 md:gap-10 gap-4 py-3 px-5 lg:p-2.5 h-full">
         <div className="lg:max-h-[calc(100dvh-84px)] h-full flex flex-col items-center lg:justify-center md:gap-10 gap-4 py-3 lg:py-10">
-          <h1 className="text-4xl lg:text-5xl font-georgia uppercase text-center font-bold">
+          <h1 className="text-4xl lg:text-5xl hidden lg:block font-georgia uppercase text-center font-bold">
             Anna Kobzar
           </h1>
           <div className="gap-4 grid grid-cols-1 grid-rows-[1fr_auto] lg:grid-cols-2 lg:flex lg:flex-col w-fit mx-auto items-start justify-center">

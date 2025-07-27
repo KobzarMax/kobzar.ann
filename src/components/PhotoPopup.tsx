@@ -34,11 +34,11 @@ export default function PhotoPopup() {
       <div className="fixed inset-0 z-[1000] w-screen h-screen flex items-center justify-center bg-black/20">
         <div
           ref={dialogRef}
-          className={`grid grid-rows-1 px-2.5 md:px-0 lg:max-w-3xl max-h-[95%] relative justify-center`}
+          className={`grid grid-rows-1 px-1 md:px-0 lg:max-w-3xl max-h-[95%] relative justify-center`}
         >
           <button
             onClick={() => handleClosePhoto()}
-            className="absolute cursor-pointer md:hidden top-3 right-3 px-3 py-1.5"
+            className="absolute cursor-pointer rotate-90 md:hidden top-3 right-3 px-3 py-1.5"
           >
             <FontAwesomeIcon className="text-white" icon={faX} />
           </button>
