@@ -1,5 +1,7 @@
 import { getPhotos } from '@/api';
 import AboutImage from '@/components/AboutImage';
+import { ROUTE_PORTFOLIO } from '@/routes/routes';
+import Link from 'next/link';
 
 const data = [
   {
@@ -52,6 +54,7 @@ export default async function About() {
         </div>
         <div className="h-full flex items-center justify-center appearBlock overflow-hidden relative">
           <AboutImage photos={photos} />
+          <Link href={ROUTE_PORTFOLIO} className="absolute inset-0 lg:hidden" />
         </div>
         {/* <div
           className="col-span-2 w-8/12 instFrame mx-auto"
