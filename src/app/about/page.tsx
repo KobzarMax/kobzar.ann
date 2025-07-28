@@ -56,12 +56,6 @@ export default async function About() {
           <AboutImage photos={photos} />
           <Link href={ROUTE_PORTFOLIO} className="absolute inset-0 lg:hidden" />
         </div>
-        {/* <div
-          className="col-span-2 w-8/12 instFrame mx-auto"
-          dangerouslySetInnerHTML={{
-            __html: `<iframe src="https://2a808c6e543d4552bcffa0f2c931ba7b.elf.site" width="100%" height="600"></iframe>`
-          }}
-        /> */}
       </div>
     </main>
   );

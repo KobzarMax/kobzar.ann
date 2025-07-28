@@ -78,3 +78,22 @@ body {
 .mainLink:hover .linkDecoration {
   opacity: 100;
 }
+
+.reviews-swiper .swiper-wrapper {
+  align-items: center;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+}
+
+.swiper-slide {
+  opacity: 0 !important;
+  transition: opacity 0.3s;
+  margin: 0 auto;
+}
+
+.swiper-slide.swiper-slide-active {
+  opacity: 1 !important;
+}

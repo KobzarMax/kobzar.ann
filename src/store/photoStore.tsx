@@ -1,3 +1,4 @@
+import { type RenderPhotoType } from '@/api';
 import { create } from 'zustand';
 
 type PhotoStoreState = {
@@ -6,12 +7,16 @@ type PhotoStoreState = {
   togglePhotoDialog: () => void;
   isDialogOpen: boolean;
   setHomePhotoUrl: (url: string) => void;
+  carouselPhotos?: RenderPhotoType[];
+  setCarouselPhotos: (photos: RenderPhotoType[]) => void;
 };
 
 const usePhotoStore = create<PhotoStoreState>((set, get) => ({
   photoUrl: '',
   homePhotoUrl: '',
   isDialogOpen: false,
+  carouselPhotos: [],
+  setCarouselPhotos: (photos) => set({ carouselPhotos: photos }),
   togglePhotoDialog: () => {
     const { isDialogOpen } = get();
 

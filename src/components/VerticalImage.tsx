@@ -36,7 +36,7 @@ export default function VerticalRandomPhoto({ randomPhoto }: Props) {
       style={{ width: '100%', height: 'auto' }}
       sizes="100vw"
       loading="lazy"
-      className="max-h-[calc(100dvh-84px)] object-cover"
+      className="max-h-[calc(100dvh-84px)] min-h-full object-cover"
       src={randomPhoto.url}
       alt={randomPhoto.name}
       onLoad={(img) => {
