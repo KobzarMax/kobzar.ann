@@ -13,7 +13,9 @@ const nextConfig: NextConfig = {
         protocol: 'https',
         hostname: 'drive.google.com'
       }
-    ]
+    ],
+    loader: 'default',
+    unoptimized: true
   }
 };
 
