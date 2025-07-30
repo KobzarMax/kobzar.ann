@@ -15,7 +15,10 @@ export const metadata: Metadata = {
     'fashion photography',
     'model projects',
     'collaborations'
-  ]
+  ],
+  verification: {
+    google: 'PW43WjXI65rpxjTYnNJSxfhGIsCNoNn_5CTrw0H3LNs'
+  }
 };
 
 export default function RootLayout({
