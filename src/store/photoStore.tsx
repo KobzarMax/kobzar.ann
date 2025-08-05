@@ -1,19 +1,19 @@
-import { type RenderPhotoType } from '@/api';
+import { type ResponseImage } from '@/actions/r2-actions';
 import { create } from 'zustand';
 
 type PhotoStoreState = {
   photoUrl: string;
-  homePhotoUrl: string;
+  activePhotoUrl: string;
   togglePhotoDialog: () => void;
   isDialogOpen: boolean;
-  setHomePhotoUrl: (url: string) => void;
-  carouselPhotos?: RenderPhotoType[];
-  setCarouselPhotos: (photos: RenderPhotoType[]) => void;
+  setActivePhotoUrl: (url: string) => void;
+  carouselPhotos?: ResponseImage[] | null;
+  setCarouselPhotos: (photos?: ResponseImage[] | null) => void;
 };
 
 const usePhotoStore = create<PhotoStoreState>((set, get) => ({
   photoUrl: '',
-  homePhotoUrl: '',
+  activePhotoUrl: '',
   isDialogOpen: false,
   carouselPhotos: [],
   setCarouselPhotos: (photos) => set({ carouselPhotos: photos }),
@@ -28,7 +28,7 @@ const usePhotoStore = create<PhotoStoreState>((set, get) => ({
     set((state) => ({ isDialogOpen: !state.isDialogOpen }));
   },
   setPhotoUrl: (url: string) => set({ photoUrl: url }),
-  setHomePhotoUrl: (url: string) => set({ homePhotoUrl: url })
+  setActivePhotoUrl: (url: string) => set({ activePhotoUrl: url })
 }));
 
 export default usePhotoStore;

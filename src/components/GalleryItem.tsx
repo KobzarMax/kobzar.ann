@@ -1,22 +1,18 @@
 'use client';
 
 import Image from 'next/image';
-import { type RenderPhotoType } from '@/api';
 import usePhotoStore from '@/store/photoStore';
+import { type ResponseImage } from '@/actions/r2-actions';
 
 export type GalleryItemProps = {
-  photo: RenderPhotoType;
-  carouselPhotos: RenderPhotoType[];
+  photo: ResponseImage;
 };
 
-export default function GalleryItem({
-  photo,
-  carouselPhotos
-}: GalleryItemProps) {
-  const { togglePhotoDialog, setCarouselPhotos } = usePhotoStore();
+export default function GalleryItem({ photo }: GalleryItemProps) {
+  const { togglePhotoDialog, setActivePhotoUrl } = usePhotoStore();
 
-  const handleOpenPhoto = () => {
-    setCarouselPhotos(carouselPhotos);
+  const handleOpenPhoto = (id: string) => {
+    setActivePhotoUrl(id);
     togglePhotoDialog();
   };
 
@@ -31,8 +27,9 @@ export default function GalleryItem({
         loading="lazy"
         style={{ width: '100%', height: 'auto' }}
         src={photo.url}
-        alt={photo.name}
-        onClick={() => handleOpenPhoto()}
+        alt={photo.key}
+        unoptimized
+        onClick={() => handleOpenPhoto(photo.url)}
       />
     </button>
   );

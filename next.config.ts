@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   images: {
     minimumCacheTTL: 60,
     dangerouslyAllowSVG: true,
+    qualities: [100],
     remotePatterns: [
       {
         protocol: 'https',
@@ -11,7 +12,15 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'drive.google.com'
+        hostname: 'drive.google.com',
+        port: '',
+        pathname: '/uc'
+      },
+      {
+        protocol: 'https',
+        hostname: 'drive.usercontent.google.com',
+        port: '',
+        pathname: '/uc'
       }
     ],
     loader: 'default',

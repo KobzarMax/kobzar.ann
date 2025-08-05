@@ -1,4 +1,4 @@
-import { getPhotos } from '@/api';
+import { fetchAllImages } from '@/actions/r2-actions';
 import AboutImage from '@/components/AboutImage';
 import { ROUTE_PORTFOLIO } from '@/routes/routes';
 import Link from 'next/link';
@@ -35,7 +35,7 @@ const data = [
 ];
 
 export default async function About() {
-  const photos = await getPhotos();
+  const { images: photos } = await fetchAllImages();
 
   return (
     <main className="bg-white lg:overflow-hidden lg:h-[calc(100dvh-84px)] lg:max-h-[calc(100dvh-84px)]">
