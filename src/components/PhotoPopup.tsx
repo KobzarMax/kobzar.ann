@@ -18,6 +18,7 @@ export default function PhotoPopup() {
     isDialogOpen,
     togglePhotoDialog,
     setHomePhotoUrl,
+
     carouselPhotos,
     setCarouselPhotos
   } = usePhotoStore();
