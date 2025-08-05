@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { fetchAllImages } from '@/actions/r2-actions';
 import Gallery from '@/components/Gallery';
 import PhotoPopup from '@/components/PhotoPopup';

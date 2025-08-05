@@ -117,3 +117,41 @@ body {
 .fade-image.loaded {
   opacity: 1;
 }
+
+/* Embla carousel fade effect base styles */
+.embla {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.embla__container {
+  display: flex;
+  height: 100%;
+}
+
+/* Position all slides on top of each other */
+.embla__slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0; /* All slides start hidden */
+  transition: opacity 0.5s ease-in-out; /* Add a smooth transition */
+}
+
+/* The active slide becomes visible */
+.embla__slide.is-active {
+  position: relative;
+  opacity: 1;
+}
+
+/*
+  Since we're using a fade effect, the container only needs to be
+  as wide as a single slide.
+*/
+.embla__container {
+  display: block;
+}

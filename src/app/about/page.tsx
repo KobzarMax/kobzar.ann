@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { fetchAllImages } from '@/actions/r2-actions';
 import AboutImage from '@/components/AboutImage';
 import { ROUTE_PORTFOLIO } from '@/routes/routes';

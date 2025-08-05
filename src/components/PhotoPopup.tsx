@@ -7,6 +7,9 @@ import { faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import ClassNames from 'embla-carousel-class-names';
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 
 export default function PhotoPopup({
   carouselPhotos
@@ -23,6 +26,13 @@ export default function PhotoPopup({
   const dialogRef = useRef<HTMLDivElement>(null);
   const [isClosing, setIsClosing] = useState(false);
 
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    {
+      loop: true
+    },
+    [ClassNames({ snapped: 'is-active' }), WheelGesturesPlugin()]
+  );
+
   const handleClosePhoto = useCallback(() => {
     setIsClosing(true);
     setTimeout(() => {
@@ -34,33 +44,39 @@ export default function PhotoPopup({
   }, [togglePhotoDialog, setActivePhotoUrl, setCarouselPhotos]);
 
   const handleNext = useCallback(() => {
-    if (carouselPhotos && carouselPhotos.length > 0) {
-      const currentIndex = carouselPhotos.findIndex(
-        (photo) => photo.url === activePhotoUrl
-      );
-      if (currentIndex === -1) return;
-      const nextIndex = (currentIndex + 1) % carouselPhotos.length;
-      const nextPhoto = carouselPhotos[nextIndex];
-      if (nextPhoto?.url) {
-        setActivePhotoUrl(nextPhoto.url);
-      }
-    }
-  }, [carouselPhotos, activePhotoUrl, setActivePhotoUrl]);
+    if (emblaApi) emblaApi.scrollNext();
+  }, [emblaApi]);
 
   const handlePrev = useCallback(() => {
-    if (carouselPhotos && carouselPhotos.length > 0) {
-      const currentIndex = carouselPhotos.findIndex(
-        (photo) => photo.url === activePhotoUrl
-      );
-      if (currentIndex === -1) return;
-      const prevIndex =
-        (currentIndex - 1 + carouselPhotos.length) % carouselPhotos.length;
-      const prevPhoto = carouselPhotos[prevIndex];
-      if (prevPhoto?.url) {
-        setActivePhotoUrl(prevPhoto.url);
+    if (emblaApi) emblaApi.scrollPrev();
+  }, [emblaApi]);
+
+  useEffect(() => {
+    if (!emblaApi || !carouselPhotos) return;
+
+    const updateActivePhoto = () => {
+      const selectedIndex = emblaApi.selectedScrollSnap();
+      const newActivePhoto = carouselPhotos[selectedIndex];
+      if (newActivePhoto?.url) {
+        setActivePhotoUrl(newActivePhoto.url);
       }
+    };
+
+    emblaApi.on('select', updateActivePhoto);
+    emblaApi.on('reInit', updateActivePhoto);
+
+    // Initial sync
+    const initialIndex = carouselPhotos.findIndex(
+      (photo) => photo.url === activePhotoUrl
+    );
+    if (initialIndex !== -1) {
+      emblaApi.scrollTo(initialIndex, true);
     }
-  }, [carouselPhotos, activePhotoUrl, setActivePhotoUrl]);
+
+    return () => {
+      emblaApi.off('select', updateActivePhoto);
+    };
+  }, [emblaApi, carouselPhotos, activePhotoUrl, setActivePhotoUrl]);
 
   useEffect(() => {
     if (!isDialogOpen) return;
@@ -92,15 +108,23 @@ export default function PhotoPopup({
           className={`grid grid-rows-1 px-1 md:px-0 lg:min-h-full max-h-[95%] py-5 justify-start`}
         >
           <div className="lg:max-w-4xl w-full mx-auto touch-none min-h-full flex items-center justify-center">
-            <Image
-              width={0}
-              height={0}
-              sizes="100vw"
-              loading="lazy"
-              className={`object-contain w-full h-full min-h-full min-w-full`}
-              src={activePhotoUrl || ''}
-              alt={'slider image'}
-            />
+            <div className="embla" ref={emblaRef}>
+              <div className="embla__container">
+                {carouselPhotos?.map((photo) => (
+                  <div className="embla__slide" key={photo.url}>
+                    <Image
+                      width={0}
+                      height={0}
+                      sizes="100vw"
+                      loading="lazy"
+                      className={`object-contain w-full h-full min-h-full min-w-full`}
+                      src={photo.url}
+                      alt={'slider image'}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
             <button
               onClick={() => handleClosePhoto()}
               className="absolute cursor-pointer rotate-90 md:hidden top-3 right-3 z-10 px-3 py-1.5"
