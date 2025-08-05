@@ -1,17 +1,30 @@
-import { fetchRandomImage } from '@/actions/r2-actions';
+import { fetchAllImages } from '@/actions/r2-actions';
 import VerticalRandomPhoto from '@/components/VerticalImage';
 import { ROUTE_ABOUT, ROUTE_PORTFOLIO } from '@/routes/routes';
 import Link from 'next/link';
 
 export default async function Home() {
-  const { image: fetchedImageOne } = await fetchRandomImage();
-  const { image: fetchedImageTwo } = await fetchRandomImage();
+  const { images: photos } = await fetchAllImages();
+
+  if (photos && photos.length < 2) {
+    return null;
+  }
+
+  const randomPhotoIndexOne = Math.floor(Math.random() * (photos?.length || 1));
+  let randomPhotoIndexTwo;
+
+  do {
+    randomPhotoIndexTwo = Math.floor(Math.random() * (photos?.length || 1));
+  } while (randomPhotoIndexTwo === randomPhotoIndexOne);
+
+  const randomPhotoOne = photos?.[randomPhotoIndexOne];
+  const randomPhotoTwo = photos?.[randomPhotoIndexTwo];
 
   return (
     <main className="bg-white lg:overflow-hidden lg:h-[calc(100dvh-84px)] lg:max-h-[calc(100dvh-84px)]">
       <div className="grid grid-rows-[auto_auto] h-full -space-y-0.5 lg:space-y-0 lg:grid-rows-1 lg:grid-cols-2">
         <div className="max-h-[calc(100dvh-84px)] relative">
-          <VerticalRandomPhoto randomPhoto={fetchedImageOne} />
+          <VerticalRandomPhoto randomPhoto={randomPhotoOne} />
           <Link
             className="inset-0 absolute outline-none mainLink"
             href={ROUTE_ABOUT}
@@ -27,7 +40,7 @@ export default async function Home() {
           </Link>
         </div>
         <div className="max-h-[calc(100dvh-84px)] relative">
-          <VerticalRandomPhoto randomPhoto={fetchedImageTwo} />
+          <VerticalRandomPhoto randomPhoto={randomPhotoTwo} />
           <Link
             className="inset-0 absolute outline-none mainLink"
             href={ROUTE_PORTFOLIO}
