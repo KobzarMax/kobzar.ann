@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { fetchAllImages } from '@/actions/r2-actions';
 import VerticalRandomPhoto from '@/components/VerticalImage';
 import { ROUTE_ABOUT, ROUTE_PORTFOLIO } from '@/routes/routes';
