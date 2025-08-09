@@ -6,7 +6,7 @@ export async function getPhotos(): Promise<RenderPhotoType[]> {
     do {
       let url =
         `https://www.googleapis.com/drive/v3/files` +
-        `?q='${process.env.FOLDER_ID}' in parents` +
+        `?q='${process.env.GOOGLE_DRIVE_FOLDER_ID}' in parents` +
         `&key=${process.env.API_KEY}` +
         `&fields=nextPageToken,files(id,name,mimeType)` +
         `&pageSize=1000`;

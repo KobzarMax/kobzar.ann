@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import Header from '@/components/Header';
-import PhotoPopup from '@/components/PhotoPopup';
 
 export const metadata: Metadata = {
   title: 'Anna Kobzar Model',
@@ -51,7 +50,6 @@ export default function RootLayout({
       <body className="font-sans">
         <Header />
         {children}
-        <PhotoPopup />
       </body>
     </html>
   );

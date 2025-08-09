@@ -5,30 +5,34 @@ import { useClickOutside } from '@/utils/client';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade, Keyboard, Mousewheel } from 'swiper/modules';
+import { type RenderPhotoType } from '@/api';
 
-export default function PhotoPopup() {
+export default function PhotoPopup({
+  carouselPhotos
+}: {
+  carouselPhotos?: RenderPhotoType[] | null;
+}) {
   const {
     isDialogOpen,
     togglePhotoDialog,
     setHomePhotoUrl,
-
-    carouselPhotos,
-    setCarouselPhotos
+    setActivePhotoUrl,
+    activePhotoUrl
   } = usePhotoStore();
   const dialogRef = useRef<HTMLDivElement>(null);
 
   const handleClosePhoto = useCallback(() => {
     togglePhotoDialog();
     setHomePhotoUrl('');
-    setCarouselPhotos([]);
-  }, [togglePhotoDialog, setHomePhotoUrl]);
+    setActivePhotoUrl('');
+  }, [togglePhotoDialog, setHomePhotoUrl, setActivePhotoUrl]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -42,6 +46,14 @@ export default function PhotoPopup() {
 
   useClickOutside(dialogRef, () => handleClosePhoto());
 
+  const initialSlideIndex = useMemo(() => {
+    if (!carouselPhotos || !activePhotoUrl) return 0;
+    const idx = carouselPhotos.findIndex(
+      (photo) => photo.url === activePhotoUrl
+    );
+    return idx >= 0 ? idx : 0;
+  }, [carouselPhotos, activePhotoUrl]);
+
   if (isDialogOpen)
     return (
       <div className="fixed inset-0 z-[1000] w-screen h-screen flex items-center lg:items-start justify-center bg-black/20">
@@ -49,27 +61,33 @@ export default function PhotoPopup() {
           ref={dialogRef}
           className={`grid grid-rows-1 px-1 md:px-0 lg:min-h-full max-h-[95%] py-5 relative justify-start`}
         >
-          <button
-            onClick={() => handleClosePhoto()}
-            className="absolute cursor-pointer rotate-90 md:hidden top-3 right-3 z-10 px-3 py-1.5"
-          >
-            <FontAwesomeIcon className="text-white" icon={faX} />
-          </button>
           <Swiper
-            loop
             slidesPerView={1}
             centeredSlides
+            initialSlide={initialSlideIndex}
             keyboard={{
               enabled: true
             }}
-            mousewheel
+            mousewheel={{
+              forceToAxis: true,
+              sensitivity: 1,
+              releaseOnEdges: true,
+              thresholdDelta: 50
+            }}
+            touchRatio={1}
+            threshold={20}
+            longSwipes={false}
+            loop={false}
             effect="fade"
             fadeEffect={{ crossFade: true }}
             modules={[EffectFade, Mousewheel, Keyboard]}
             className="swiper lg:max-w-4xl w-full mx-auto flex items-start justify-center reviews-swiper relative"
           >
             {carouselPhotos?.map((photo) => (
-              <SwiperSlide key={photo.id} className="swiper-slide w-full">
+              <SwiperSlide
+                key={photo.id}
+                className="swiper-slide relative w-full !h-fit"
+              >
                 <Image
                   width={0}
                   height={0}
@@ -80,6 +98,12 @@ export default function PhotoPopup() {
                   src={photo.url}
                   alt={photo.name}
                 />
+                <button
+                  onClick={() => handleClosePhoto()}
+                  className="absolute cursor-pointer rotate-90 md:hidden top-3 right-3 z-10 px-3 py-1.5"
+                >
+                  <FontAwesomeIcon className="text-white" icon={faX} />
+                </button>
               </SwiperSlide>
             ))}
           </Swiper>
