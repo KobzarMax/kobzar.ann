@@ -7,8 +7,8 @@ export default async function PortfolioPage() {
 
   return (
     <main className="bg-white">
-      <Gallery photos={renderingPhotos} />
-      <PhotoPopup carouselPhotos={renderingPhotos} />
+      <Gallery photos={renderingPhotos.reverse()} />
+      <PhotoPopup carouselPhotos={renderingPhotos.reverse()} />
     </main>
   );
 }

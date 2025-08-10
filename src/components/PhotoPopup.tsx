@@ -59,7 +59,7 @@ export default function PhotoPopup({
       <div className="fixed inset-0 z-[1000] w-screen h-screen flex items-start justify-center bg-black/20">
         <div
           ref={dialogRef}
-          className={`grid grid-rows-1 px-1 md:px-0 lg:min-h-full max-h-[95%] pt-16 py-5 relative justify-start`}
+          className={`grid grid-rows-1 px-1 md:px-0 lg:min-h-full max-h-[95%] pt-[4.75rem] py-5 relative justify-start`}
         >
           <Swiper
             slidesPerView={1}
