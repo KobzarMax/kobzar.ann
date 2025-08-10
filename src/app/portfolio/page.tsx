@@ -5,10 +5,12 @@ import PhotoPopup from '@/components/PhotoPopup';
 export default async function PortfolioPage() {
   const renderingPhotos = await getPhotos();
 
+  const reversedPhotos = [...renderingPhotos].reverse();
+
   return (
     <main className="bg-white">
-      <Gallery photos={renderingPhotos.reverse()} />
-      <PhotoPopup carouselPhotos={renderingPhotos.reverse()} />
+      <Gallery photos={reversedPhotos} />
+      <PhotoPopup carouselPhotos={reversedPhotos} />
     </main>
   );
 }
