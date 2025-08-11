@@ -21,14 +21,13 @@ export default function AboutImage({ photos }: Props) {
     setRandomPhoto(photos[index]);
   }, [photos]);
 
-  if (!randomPhoto) return null; // Or return a loader / skeleton
-
+  if (!randomPhoto) return null;
   return isLandscape ? (
     <Image
       fill
       sizes="100vw"
       loading="lazy"
-      className="max-h-[calc(100dvh-84px)] object-center object-contain"
+      className="max-h-[calc(100dvh-84px)] min-h-[50%] object-center object-contain"
       src={randomPhoto.url}
       alt={randomPhoto.name}
       onLoad={(img) => {

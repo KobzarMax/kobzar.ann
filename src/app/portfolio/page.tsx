@@ -1,14 +1,19 @@
 import { getPhotos } from '@/api';
+import Footer from '@/components/Footer';
 import Gallery from '@/components/Gallery';
 import PhotoPopup from '@/components/PhotoPopup';
+import { Fragment } from 'react';
 
 export default async function PortfolioPage() {
   const renderingPhotos = await getPhotos();
 
   return (
-    <main className="bg-white">
-      <Gallery photos={renderingPhotos} />
-      <PhotoPopup carouselPhotos={renderingPhotos} />
-    </main>
+    <Fragment>
+      <main className="bg-white">
+        <Gallery photos={renderingPhotos} />
+        <PhotoPopup carouselPhotos={renderingPhotos} />
+      </main>
+      <Footer />
+    </Fragment>
   );
 }
