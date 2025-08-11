@@ -10,15 +10,8 @@ export default async function Home() {
     return null;
   }
 
-  const randomPhotoIndexOne = Math.floor(Math.random() * photos.length);
-  let randomPhotoIndexTwo;
-
-  do {
-    randomPhotoIndexTwo = Math.floor(Math.random() * photos.length);
-  } while (randomPhotoIndexTwo === randomPhotoIndexOne);
-
-  const randomPhotoOne = photos[randomPhotoIndexOne];
-  const randomPhotoTwo = photos[randomPhotoIndexTwo];
+  const shuffled = [...photos].sort(() => Math.random() - 0.5);
+  const [randomPhotoOne, randomPhotoTwo] = shuffled.slice(0, 2);
 
   return (
     <main className="bg-white lg:overflow-hidden lg:h-[calc(100dvh-84px)] lg:max-h-[calc(100dvh-84px)]">
@@ -28,6 +21,7 @@ export default async function Home() {
           <Link
             className="inset-0 absolute outline-none focus:outline-none active:outline-none mainLink"
             href={ROUTE_ABOUT}
+            aria-label="About page"
           >
             <div className="absolute left-1/2 -translate-x-1/2 bottom-[12.5%]">
               <div className="px-3 b py-3 relative">
@@ -42,6 +36,7 @@ export default async function Home() {
         <div className="max-h-[calc(100dvh-84px)] relative">
           <VerticalRandomPhoto randomPhoto={randomPhotoTwo} />
           <Link
+            aria-label="Portfolio page"
             className="inset-0 absolute outline-none focus:outline-none active:outline-none mainLink"
             href={ROUTE_PORTFOLIO}
           >
