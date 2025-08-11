@@ -1,10 +1,8 @@
 import { getPhotos } from '@/api';
 import AboutImage from '@/components/AboutImage';
 import Footer from '@/components/Footer';
-import InstagramEmbed from '@/components/InstagramEmbed';
 import { ROUTE_PORTFOLIO } from '@/routes/routes';
 import Link from 'next/link';
-import { Fragment } from 'react';
 
 const data = [
   {
