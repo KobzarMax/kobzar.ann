@@ -26,7 +26,7 @@ export default async function Home() {
         <div className="max-h-[calc(100dvh-84px)] relative">
           <VerticalRandomPhoto randomPhoto={randomPhotoOne} />
           <Link
-            className="inset-0 absolute outline-none mainLink"
+            className="inset-0 absolute outline-none focus:outline-none active:outline-none mainLink"
             href={ROUTE_ABOUT}
           >
             <div className="absolute left-1/2 -translate-x-1/2 bottom-[12.5%]">
@@ -42,7 +42,7 @@ export default async function Home() {
         <div className="max-h-[calc(100dvh-84px)] relative">
           <VerticalRandomPhoto randomPhoto={randomPhotoTwo} />
           <Link
-            className="inset-0 absolute outline-none mainLink"
+            className="inset-0 absolute outline-none focus:outline-none active:outline-none mainLink"
             href={ROUTE_PORTFOLIO}
           >
             <div className="absolute left-1/2 -translate-x-1/2 bottom-[12.5%]">

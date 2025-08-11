@@ -4,9 +4,11 @@ import { create } from 'zustand';
 type PhotoStoreState = {
   photoUrl: string;
   homePhotoUrl: string;
+  activePhotoUrl: string;
   togglePhotoDialog: () => void;
   isDialogOpen: boolean;
   setHomePhotoUrl: (url: string) => void;
+  setActivePhotoUrl: (url: string) => void;
   carouselPhotos?: RenderPhotoType[];
   setCarouselPhotos: (photos: RenderPhotoType[]) => void;
 };
@@ -15,7 +17,9 @@ const usePhotoStore = create<PhotoStoreState>((set, get) => ({
   photoUrl: '',
   homePhotoUrl: '',
   isDialogOpen: false,
+  activePhotoUrl: '',
   carouselPhotos: [],
+  setActivePhotoUrl: (url: string) => set({ activePhotoUrl: url }),
   setCarouselPhotos: (photos) => set({ carouselPhotos: photos }),
   togglePhotoDialog: () => {
     const { isDialogOpen } = get();

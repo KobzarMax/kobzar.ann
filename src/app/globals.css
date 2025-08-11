@@ -97,3 +97,35 @@ body {
 .swiper-slide.swiper-slide-active {
   opacity: 1 !important;
 }
+
+.embla {
+  overflow: hidden;
+}
+.embla__container {
+  display: flex;
+  touch-action: pan-y pinch-zoom;
+}
+.embla__slide {
+  flex: 0 0 100%;
+  min-width: 0;
+}
+
+.embla__slide {
+  transform: translate3d(0, 0, 0);
+}
+
+.mainLink {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mainLink:active {
+  outline: none;
+  border: none;
+}
+
+.mainLink:focus,
+.mainLink:active {
+  outline: none;
+  border: none;
+  box-shadow: none;
+}

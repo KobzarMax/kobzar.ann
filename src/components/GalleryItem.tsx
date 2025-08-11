@@ -6,17 +6,13 @@ import usePhotoStore from '@/store/photoStore';
 
 export type GalleryItemProps = {
   photo: RenderPhotoType;
-  carouselPhotos: RenderPhotoType[];
 };
 
-export default function GalleryItem({
-  photo,
-  carouselPhotos
-}: GalleryItemProps) {
-  const { togglePhotoDialog, setCarouselPhotos } = usePhotoStore();
+export default function GalleryItem({ photo }: GalleryItemProps) {
+  const { togglePhotoDialog, setActivePhotoUrl } = usePhotoStore();
 
-  const handleOpenPhoto = () => {
-    setCarouselPhotos(carouselPhotos);
+  const handleOpenPhoto = (id: string) => {
+    setActivePhotoUrl(id);
     togglePhotoDialog();
   };
 
@@ -32,7 +28,7 @@ export default function GalleryItem({
         style={{ width: '100%', height: 'auto' }}
         src={photo.url}
         alt={photo.name}
-        onClick={() => handleOpenPhoto()}
+        onClick={() => handleOpenPhoto(photo.url)}
       />
     </button>
   );
