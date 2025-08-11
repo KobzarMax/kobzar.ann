@@ -85,7 +85,7 @@ body {
 
 .swiper-slide {
   background-position: center;
-  background-size: cover;
+  background-size: contain;
 }
 
 .swiper-slide {

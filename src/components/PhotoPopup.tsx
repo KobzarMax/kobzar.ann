@@ -86,14 +86,14 @@ export default function PhotoPopup({
             {carouselPhotos?.map((photo) => (
               <SwiperSlide
                 key={photo.id}
-                className="swiper-slide relative w-full !h-fit"
+                className="swiper-slide !grid relative w-full"
               >
                 <Image
                   width={0}
                   height={0}
                   sizes="100vw"
                   loading="lazy"
-                  className="object-contain row-span-1"
+                  className="object-contain row-span-1 max-h-[99vh]"
                   style={{ width: '100%', height: '100%' }}
                   src={photo.url}
                   alt={photo.name}
