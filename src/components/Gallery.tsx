@@ -42,8 +42,15 @@ export default function Gallery({ photos }: { photos: RenderPhotoType[] }) {
     <div className="container pt-5 lg:pb-[4vh] mx-auto grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       {columns.map((column, idx) => (
         <div key={idx} className="flex-1 flex flex-col gap-4">
-          {column.map((photo) => {
-            return <GalleryItem key={photo.id} photo={photo} />;
+          {column.map((photo, i) => {
+            const carouselPhotos = column.slice(i, i + 10);
+            return (
+              <GalleryItem
+                carouselPhotos={carouselPhotos}
+                key={photo.id}
+                photo={photo}
+              />
+            );
           })}
         </div>
       ))}

@@ -11,7 +11,7 @@ export default async function PortfolioPage() {
     <Fragment>
       <main className="bg-white">
         <Gallery photos={renderingPhotos} />
-        <PhotoPopup carouselPhotos={renderingPhotos.slice(0, 10)} />
+        <PhotoPopup />
       </main>
       <Footer />
     </Fragment>

@@ -5,36 +5,31 @@ import { useClickOutside } from '@/utils/client';
 import { faX } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Image from 'next/image';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade, Keyboard, Mousewheel } from 'swiper/modules';
-import { type RenderPhotoType } from '@/api';
-import type { Swiper as SwiperClass } from 'swiper';
 
-export default function PhotoPopup({
-  carouselPhotos
-}: {
-  carouselPhotos?: RenderPhotoType[] | null;
-}) {
+export default function PhotoPopup() {
   const {
     isDialogOpen,
     togglePhotoDialog,
     setHomePhotoUrl,
     setActivePhotoUrl,
-    activePhotoUrl
+    carouselPhotos,
+    setCarouselPhotos
   } = usePhotoStore();
 
   const dialogRef = useRef<HTMLDivElement>(null);
-  const swiperRef = useRef<SwiperClass | null>(null);
 
   const handleClosePhoto = useCallback(() => {
     togglePhotoDialog();
     setHomePhotoUrl('');
     setActivePhotoUrl('');
+    setCarouselPhotos([]);
   }, [togglePhotoDialog, setHomePhotoUrl, setActivePhotoUrl]);
 
   useEffect(() => {
@@ -49,21 +44,6 @@ export default function PhotoPopup({
 
   useClickOutside(dialogRef, handleClosePhoto);
 
-  const initialSlideIndex = useMemo(() => {
-    if (!carouselPhotos || !activePhotoUrl) return 0;
-    const idx = carouselPhotos.findIndex(
-      (photo) => photo.url === activePhotoUrl
-    );
-    return idx >= 0 ? idx : 0;
-  }, [carouselPhotos, activePhotoUrl]);
-
-  // Jump to correct slide when opening
-  useEffect(() => {
-    if (isDialogOpen && swiperRef.current && initialSlideIndex >= 0) {
-      swiperRef.current.slideTo(initialSlideIndex, 0); // instant
-    }
-  }, [isDialogOpen, initialSlideIndex]);
-
   if (!isDialogOpen) return null;
 
   return (
@@ -73,10 +53,8 @@ export default function PhotoPopup({
         className="grid grid-rows-1 px-1 md:px-0 lg:min-h-full max-h-[95%] pt-[4.5rem] lg:pt-5 py-5 relative justify-start"
       >
         <Swiper
-          onSwiper={(swiper) => (swiperRef.current = swiper)}
           slidesPerView={1}
           centeredSlides
-          // initialSlide={initialSlideIndex}
           keyboard={{ enabled: true }}
           mousewheel={{
             forceToAxis: true,
@@ -87,7 +65,7 @@ export default function PhotoPopup({
           touchRatio={1}
           threshold={20}
           longSwipes={false}
-          loop={false}
+          loop
           effect="fade"
           fadeEffect={{ crossFade: true }}
           modules={[EffectFade, Mousewheel, Keyboard]}
