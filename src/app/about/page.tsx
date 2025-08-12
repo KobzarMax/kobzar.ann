@@ -54,7 +54,7 @@ export default async function About() {
               ))}
             </div>
           </div>
-          <div className="h-full max-h-[75vh] flex items-center justify-center appearBlock overflow-hidden relative">
+          <div className="h-full max-h-[75vh] min-h-[60dvw] sm:min-h-[62.5dvw] lg:min-h-0 flex items-center justify-center appearBlock overflow-hidden relative">
             <AboutImage photos={photos} />
             <Link
               href={ROUTE_PORTFOLIO}
