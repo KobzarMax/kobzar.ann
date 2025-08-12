@@ -44,7 +44,7 @@ export default function PhotoPopup({
     }
   }, [isDialogOpen, handleClosePhoto]);
 
-  useClickOutside(dialogRef, () => handleClosePhoto());
+  useClickOutside(dialogRef, handleClosePhoto);
 
   const initialSlideIndex = useMemo(() => {
     if (!carouselPhotos || !activePhotoUrl) return 0;
@@ -64,6 +64,7 @@ export default function PhotoPopup({
           <Swiper
             slidesPerView={1}
             centeredSlides
+            key={initialSlideIndex}
             initialSlide={initialSlideIndex}
             keyboard={{
               enabled: true
