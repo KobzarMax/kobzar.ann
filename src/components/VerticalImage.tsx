@@ -20,7 +20,7 @@ export default function VerticalRandomPhoto({ randomPhoto }: Props) {
       fill
       sizes="100vw"
       loading="lazy"
-      className="max-h-[calc(100dvh-84px)] aspect-[3/4] min-h-[50%] object-center object-cover"
+      className="max-h-[calc(100dvh-84px)] object-center object-cover"
       src={randomPhoto.url}
       alt={randomPhoto.name}
       onLoad={(img) => {
