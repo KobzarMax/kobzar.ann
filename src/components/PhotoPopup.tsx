@@ -76,7 +76,7 @@ export default function PhotoPopup({
           onSwiper={(swiper) => (swiperRef.current = swiper)}
           slidesPerView={1}
           centeredSlides
-          initialSlide={initialSlideIndex}
+          // initialSlide={initialSlideIndex}
           keyboard={{ enabled: true }}
           mousewheel={{
             forceToAxis: true,
