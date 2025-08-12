@@ -13,6 +13,7 @@ import 'swiper/css/navigation';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectFade, Keyboard, Mousewheel } from 'swiper/modules';
 import { type RenderPhotoType } from '@/api';
+import type { Swiper as SwiperClass } from 'swiper';
 
 export default function PhotoPopup({
   carouselPhotos
@@ -28,7 +29,7 @@ export default function PhotoPopup({
   } = usePhotoStore();
 
   const dialogRef = useRef<HTMLDivElement>(null);
-  const swiperRef = useRef<any>(null);
+  const swiperRef = useRef<SwiperClass | null>(null);
 
   const handleClosePhoto = useCallback(() => {
     togglePhotoDialog();
