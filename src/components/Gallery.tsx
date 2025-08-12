@@ -39,7 +39,7 @@ export default function Gallery({ photos }: { photos: RenderPhotoType[] }) {
   }, [photos, visibleCount]);
 
   return (
-    <div className="container pt-5 mx-auto grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+    <div className="container pt-5 pb-[4vh] mx-auto grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       {columns.map((column, idx) => (
         <div key={idx} className="flex-1 flex flex-col gap-4">
           {column.map((photo) => {
@@ -49,7 +49,7 @@ export default function Gallery({ photos }: { photos: RenderPhotoType[] }) {
       ))}
 
       {photos && visibleCount < photos.length && (
-        <div ref={loadMoreRef} className="h-20" />
+        <div ref={loadMoreRef} className="h-40" />
       )}
     </div>
   );

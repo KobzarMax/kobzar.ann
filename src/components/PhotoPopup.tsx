@@ -86,7 +86,7 @@ export default function PhotoPopup({
             {carouselPhotos?.map((photo) => (
               <SwiperSlide
                 key={photo.id}
-                className="swiper-slide !grid relative w-full"
+                className="swiper-slide !grid relative w-full !h-fit"
               >
                 <Image
                   width={0}
@@ -100,7 +100,7 @@ export default function PhotoPopup({
                 />
                 <button
                   onClick={() => handleClosePhoto()}
-                  className="absolute cursor-pointer rotate-90 md:hidden top-3 right-3 z-10 px-3 py-1.5"
+                  className="absolute cursor-pointer rotate-90 md:hidden top-1 right-1.5 z-10 px-3 py-1.5"
                 >
                   <FontAwesomeIcon className="text-white" icon={faX} />
                 </button>
